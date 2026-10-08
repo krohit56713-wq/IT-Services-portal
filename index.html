@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITServicePro - IT Services Portal</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="brand">
+            <i class="fa-solid fa-server"></i>
+            <span>ITServicePro</span>
+        </div>
+        <ul class="nav-links">
+            <li class="active"><a href="#" onclick="switchTab('dashboard')"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="#" onclick="switchTab('services')"><i class="fa-solid fa-list-check"></i> Service Catalog</a></li>
+            <li><a href="#" onclick="switchTab('tickets')"><i class="fa-solid fa-ticket"></i> Ticket Management</a></li>
+            <li><a href="#" onclick="switchTab('requests')"><i class="fa-solid fa-paper-plane"></i> Service Requests</a></li>
+            <li><a href="#" onclick="switchTab('assets')"><i class="fa-solid fa-laptop-code"></i> Asset Management</a></li>
+            <li><a href="#" onclick="switchTab('clients')"><i class="fa-solid fa-users"></i> Client Management</a></li>
+            <li><a href="#" onclick="switchTab('knowledge')"><i class="fa-solid fa-book-open"></i> Knowledge Base</a></li>
+            <li><a href="#" onclick="switchTab('reports')"><i class="fa-solid fa-chart-line"></i> Reports & Analytics</a></li>
+            <li><a href="#" onclick="switchTab('login')"><i class="fa-solid fa-user-lock"></i> Login / Register</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="top-left">
+                <i class="fa-solid fa-bars toggle-btn" onclick="toggleSidebar()"></i>
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="globalSearch" placeholder="Search tickets, assets, articles..." onkeyup="filterGlobal()">
+                </div>
+            </div>
+            <div class="top-right">
+                <div class="user-badge" id="currentUserBadge">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span id="navUserName">Admin User</span>
+                    <small id="navUserRole">(Admin)</small>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dynamic Content Sections -->
+        <div class="content-body">
+
+            <!-- 1. DASHBOARD -->
+            <section id="dashboard" class="tab-content active">
+                <div class="page-header">
+                    <h2>Dashboard & SLA Overview</h2>
+                    <p>Service overview, ticket statistics, recent activity, and SLA compliance.</p>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="card metric-card">
+                        <div class="icon-box bg-blue"><i class="fa-solid fa-ticket"></i></div>
+                        <div>
+                            <h4>Total Tickets</h4>
+                            <p class="metric-num" id="stat-total-tickets">0</p>
+                        </div>
+                    </div>
+                    <div class="card metric-card">
+                        <div class="icon-box bg-orange"><i class="fa-solid fa-clock"></i></div>
+                        <div>
+                            <h4>Open Tickets</h4>
+                            <p class="metric-num" id="stat-open-tickets">0</p>
+                        </div>
+                    </div>
+                    <div class="card metric-card">
+                        <div class="icon-box bg-green"><i class="fa-solid fa-shield-check"></i></div>
+                        <div>
+                            <h4>SLA Compliance</h4>
+                            <p class="metric-num" id="stat-sla">98.5%</p>
+                        </div>
+                    </div>
+                    <div class="card metric-card">
+                        <div class="icon-box bg-purple"><i class="fa-solid fa-desktop"></i></div>
+                        <div>
+                            <h4>Total IT Assets</h4>
+                            <p class="metric-num" id="stat-total-assets">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2col">
+                    <div class="card">
+                        <h3><i class="fa-solid fa-list"></i> Recent Activity Stream</h3>
+                        <ul class="activity-list" id="activityStream">
+                            <li><i class="fa-solid fa-circle-check text-green"></i> Ticket #101 created for Email Server Down</li>
+                            <li><i class="fa-solid fa-arrows-rotate text-blue"></i> Asset AST-501 assigned to Client #1</li>
+                            <li><i class="fa-solid fa-user-plus text-purple"></i> New Client profile added for TechCorp</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fa-solid fa-chart-pie"></i> SLA & Performance Summary</h3>
+                        <div class="sla-info">
+                            <p><strong>Critical Response SLA:</strong> <span class="badge badge-critical">&lt; 1 Hour</span></p>
+                            <p><strong>High Priority SLA:</strong> <span class="badge badge-high">&lt; 4 Hours</span></p>
+                            <p><strong>Medium Priority SLA:</strong> <span class="badge badge-medium">&lt; 8 Hours</span></p>
+                            <p><strong>Low Priority SLA:</strong> <span class="badge badge-low">&lt; 24 Hours</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. SERVICE CATALOG -->
+            <section id="services" class="tab-content">
+                <div class="page-header">
+                    <h2>Service Catalog</h2>
+                    <p>List of available IT services with descriptions, pricing, and SLA details.</p>
+                </div>
+                <div class="catalog-grid" id="serviceCatalogGrid">
+                    <!-- Dynamic Service Cards -->
+                </div>
+            </section>
+
+            <!-- 3. TICKET MANAGEMENT -->
+            <section id="tickets" class="tab-content">
+                <div class="page-header">
+                    <h2>Ticket Management</h2>
+                    <p>Create, view, update, and track support tickets with priority levels.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Create New Support Ticket</h3>
+                    <form id="ticketForm" onsubmit="createTicket(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input type="text" id="tTitle" required placeholder="e.g. Email Server Down">
+                            </div>
+                            <div class="form-group">
+                                <label>Client ID / Name</label>
+                                <select id="tClientId" required>
+                                    <!-- Dynamic Clients -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Priority Level</label>
+                                <select id="tPriority">
+                                    <option value="Critical">Critical</option>
+                                    <option value="High">High</option>
+                                    <option value="Medium" selected>Medium</option>
+                                    <option value="Low">Low</option>
+                                    <option value="Informational">Informational</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Assigned Technician</label>
+                                <input type="text" id="tAssigned" placeholder="e.g. John Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="tDesc" rows="3" required placeholder="Describe the IT issue in detail..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Submit Ticket</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3>All Support Tickets</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Client</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Created Date</th>
+                                    <th>Assigned To</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ticketsTableBody">
+                                <!-- Dynamic Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. SERVICE REQUESTS -->
+            <section id="requests" class="tab-content">
+                <div class="page-header">
+                    <h2>Service Requests</h2>
+                    <p>Submit and manage service requests (software installation, hardware setup, etc.)</p>
+                </div>
+
+                <div class="card">
+                    <h3>Submit Service Request</h3>
+                    <form id="requestForm" onsubmit="createServiceRequest(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Select Service</label>
+                                <select id="srServiceSelect">
+                                    <!-- Dynamic Options -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Client</label>
+                                <select id="srClientSelect">
+                                    <!-- Dynamic Options -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Request Details</label>
+                            <textarea id="srDetails" rows="3" required placeholder="Provide setup specifications or requirements..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Send Request</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3>Submitted Service Requests</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Client</th>
+                                    <th>Service</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="requestsTableBody">
+                                <!-- Dynamic Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. ASSET MANAGEMENT -->
+            <section id="assets" class="tab-content">
+                <div class="page-header">
+                    <h2>Asset Management</h2>
+                    <p>Track IT assets (hardware, software licenses, devices) with status.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Add IT Asset</h3>
+                    <form id="assetForm" onsubmit="createAsset(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Asset Name</label>
+                                <input type="text" id="aName" required placeholder="e.g. Dell XPS 15">
+                            </div>
+                            <div class="form-group">
+                                <label>Type</label>
+                                <select id="aType">
+                                    <option value="Hardware">Hardware</option>
+                                    <option value="Software License">Software License</option>
+                                    <option value="Network Device">Network Device</option>
+                                    <option value="Mobile Device">Mobile Device</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Serial Number / License Key</label>
+                                <input type="text" id="aSerial" required placeholder="e.g. SN-993821">
+                            </div>
+                            <div class="form-group">
+                                <label>Assigned To</label>
+                                <input type="text" id="aAssigned" placeholder="e.g. Jane Smith">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-desktop"></i> Register Asset</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3>Asset Inventory</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Asset ID</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Serial No.</th>
+                                    <th>Assigned To</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="assetsTableBody">
+                                <!-- Dynamic Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. CLIENT MANAGEMENT -->
+            <section id="clients" class="tab-content">
+                <div class="page-header">
+                    <h2>Client Management</h2>
+                    <p>Manage client profiles, contacts, and service history.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Add New Client Profile</h3>
+                    <form id="clientForm" onsubmit="createClient(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Client / Company Name</label>
+                                <input type="text" id="cName" required placeholder="e.g. Acme Corp">
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Person</label>
+                                <input type="text" id="cContact" required placeholder="e.g. Alice Johnson">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="cEmail" required placeholder="alice@acme.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="text" id="cPhone" required placeholder="+1 555-0192">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Save Client Profile</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3>Client Directory</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Client ID</th>
+                                    <th>Company</th>
+                                    <th>Contact Person</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clientsTableBody">
+                                <!-- Dynamic Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. KNOWLEDGE BASE -->
+            <section id="knowledge" class="tab-content">
+                <div class="page-header">
+                    <h2>Knowledge Base</h2>
+                    <p>Articles, FAQs, and solutions for common IT issues.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Search Articles</h3>
+                    <input type="text" id="kbSearch" class="form-control" placeholder="Type keyword to search KB articles..." onkeyup="filterKB()">
+                </div>
+
+                <div class="kb-grid" id="kbGrid">
+                    <!-- Dynamic KB Cards -->
+                </div>
+            </section>
+
+            <!-- 8. REPORTS & ANALYTICS -->
+            <section id="reports" class="tab-content">
+                <div class="page-header">
+                    <h2>Reports & Analytics</h2>
+                    <p>Service performance reports, ticket resolution times, and client satisfaction.</p>
+                </div>
+
+                <div class="grid-2col">
+                    <div class="card">
+                        <h3><i class="fa-solid fa-chart-bar"></i> Service Performance Metrics</h3>
+                        <ul class="stats-list">
+                            <li><span>Avg. Ticket Resolution Time:</span> <strong>3.2 Hours</strong></li>
+                            <li><span>First Contact Resolution Rate:</span> <strong>84%</strong></li>
+                            <li><span>Client Satisfaction Score (CSAT):</span> <strong>4.8 / 5.0</strong></li>
+                            <li><span>Total Resolved Tickets:</span> <strong id="reportResolvedCount">0</strong></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fa-solid fa-pie-chart"></i> Ticket Priority Distribution</h3>
+                        <div class="priority-summary" id="priorityDistribution">
+                            <!-- Dynamic Breakdown -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. LOGIN / REGISTER -->
+            <section id="login" class="tab-content">
+                <div class="page-header">
+                    <h2>User Authentication</h2>
+                    <p>Simulated login/register with role switching (Admin, Technician, Client).</p>
+                </div>
+
+                <div class="login-wrapper">
+                    <div class="card login-card">
+                        <h3><i class="fa-solid fa-lock"></i> Switch Role / Login</h3>
+                        <br>
+                        <form onsubmit="handleLogin(event)">
+                            <div class="form-group">
+                                <label>User Name</label>
+                                <input type="text" id="loginUsername" class="form-control" value="John Developer" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Select Role</label>
+                                <select id="loginRole" class="form-control">
+                                    <option value="Admin">Admin</option>
+                                    <option value="Technician">Technician</option>
+                                    <option value="Client">Client</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Set Role & Login</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Main JavaScript Application -->
+    <script src="script.js"></script>
+</body>
+</html>
