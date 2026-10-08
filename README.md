@@ -31,14 +31,4 @@
 
 ---
 
-## 💻 Tech Stack
-- **HTML5**: Structured semantic web layout.
-- **CSS3**: Custom CSS with CSS variables and responsive Grid/Flexbox layouts.
-- **JavaScript (ES6)**: Dynamic DOM manipulation and LocalStorage data backup.
 
----
-
-## 🚀 How to Run Locally
-1. Extract the contents of `ITServicePro_GitHub_Repository.zip`.
-2. Open `index.html` directly in any web browser.
-3. No database or npm server installation required!
