@@ -6,12 +6,12 @@
 
 ---
 
-## 🚀 Overview
+##  Overview
 **ITServicePro** is a comprehensive, production-ready frontend IT Service Management (ITSM) web portal. It provides a centralized dashboard for IT service delivery, support ticket management, service requests, hardware/software asset management, client administration, knowledge base articles, and service analytics.
 
 ---
 
-## 🛠️ Included Modules & Features
+##  Included Modules & Features
 - **Dashboard**: High-level service statistics, recent activity log, and SLA compliance metrics.
 - **Service Catalog**: IT services list with descriptions, pricing, and SLA timeframes.
 - **Ticket Management**: Full CRUD capabilities for support tickets with priority levels (`Critical`, `High`, `Medium`, `Low`, `Informational`).
@@ -24,7 +24,7 @@
 
 ---
 
-## 🎨 Design Guidelines Followed
+##  Design Guidelines Followed
 - **Color Scheme**: Blue (`#2563EB`), Dark Blue (`#1E40AF`), White (`#FFFFFF`), Light Blue (`#DBEAFE`).
 - **Typography & Layout**: Clean, organized, modern sidebar layout with FontAwesome icons.
 - **Responsiveness**: Fully optimized for Desktop, Tablet, and Mobile devices.
